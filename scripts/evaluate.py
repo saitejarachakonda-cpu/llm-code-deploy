@@ -11,6 +11,3 @@ def check_pages_url(pages_url):
     # simple http check
     r = requests.get(pages_url, timeout=10)
     return r.status_code == 200
-
-Thanks & Regards
-Sai Teja Rachakonda
