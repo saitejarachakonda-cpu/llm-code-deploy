@@ -1,1 +1,29 @@
+name: CI - Test & Pages Deploy
+on:
+  push:
+    branches: [ main ]
 
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install Playwright deps
+        run: npx playwright install --with-deps
+      - name: Run Playwright tests
+        run: npx playwright test
+
+  deploy_pages:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
