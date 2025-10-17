@@ -1,1 +1,9 @@
-
+fastapi
+uvicorn[standard]
+python-multipart
+PyGithub
+requests
+pydantic
+jinja2
+playwright
+python-dotenv
